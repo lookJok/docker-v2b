@@ -1,0 +1,39 @@
+
+services:
+  php-fpm:
+    build: .
+    image: php-fpm:latest
+    container_name: php-fpm
+    volumes:
+      - './v2b:/v2b'
+      - './phplogs:/phplogs'
+      - './supervisord.conf:/run/supervisor/supervisord.conf'
+      - './crontabs.conf:/etc/crontabs/root'
+      - './www.conf:/usr/local/etc/php-fpm.d/www.conf'
+
+    depends_on:
+      - mysql
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "80:80"  # 将 Caddy 的 80 端口映射到主机的 80 端口
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile  # 将本地的 Caddyfile 映射到容器
+      - ./v2b:/v2b  # 将网页文件映射到容器
+      - ./wwwlogs:/wwwlogs
+    depends_on:
+      - php-fpm  # 确保 php-fpm 服务先启动
+
+  mysql:
+    image: mysql:5.7.29
+    volumes:
+      - './mysql:/var/lib/mysql'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: v2boardisbest
+      MYSQL_DATABASE: v2board
+volumes:
+  caddy_data:
+  caddy_config:

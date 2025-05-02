@@ -1,0 +1,13 @@
+:80 {
+    # 设置网站根目录
+    root * /v2b/public
+    php_fastcgi  php-fpm:9000
+    file_server
+    try_files {path} {path}/ /index.php?{query}
+
+    # 配置日志输出路径
+    log {
+            output file /wwwlogs/caddy.log
+        }
+
+}
