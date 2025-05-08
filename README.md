@@ -1,5 +1,5 @@
 # docker-v2b
-##一款🚀多代理协议管理面板应用程序界面-V2Board-docker版本
+#一款🚀多代理协议管理面板应用程序界面-V2Board-docker版本
 #启动环境
 cd /docker-v2b
 如果你需要更改数据库的名称和密码，你可以在docker-compose.yml文件中进行修改。修改完成后，运行以下命令来启动环境：
