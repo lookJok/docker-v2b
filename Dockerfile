@@ -14,11 +14,11 @@ RUN apk update && apk add --no-cache \
     && docker-php-ext-install pdo_mysql pcntl zip gd \
     # 清理构建依赖
     && rm -rf /var/cache/apk/*
+RUN chmod  chown -R www-data /v2b
 
 WORKDIR /v2b
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
-
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 #CMD ["sh", "-c", "crond && redis-server --daemonize yes && php-fpm "]

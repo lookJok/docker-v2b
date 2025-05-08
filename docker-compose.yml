@@ -9,7 +9,7 @@ services:
       - './phplogs:/phplogs'
       - './supervisord.conf:/run/supervisor/supervisord.conf'
       - './crontabs.conf:/etc/crontabs/root'
-      - './www.conf:/usr/local/etc/php-fpm.d/www.conf'
+      - './php-fpm.conf:/usr/local/etc/php-fpm.d/php-fpm.conf'
 
     depends_on:
       - mysql
